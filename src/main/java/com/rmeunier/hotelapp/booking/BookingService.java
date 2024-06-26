@@ -1,6 +1,7 @@
 package com.rmeunier.hotelapp.booking;
 
 import com.rmeunier.hotelapp.booking.model.Booking;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class BookingService {
 
     public Booking getBookingById(Long id) {
         return bookingRepository.findById(id)
-               .orElseThrow(() -> new IllegalArgumentException("Booking not found with id: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Booking not found with id: " + id));
     }
 
     public List<Booking> getBookingsByRoomId(Long roomId) {
@@ -36,13 +37,20 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public Booking updateBooking(Long id, Booking booking) {}
+    public void updateBooking(Long id, Booking booking) {
+        if (!bookingRepository.existsById(id)) {
+            throw new IllegalArgumentException("Booking not found with id: " + id);
+        }
+
+        bookingRepository.save(booking);
+    }
 
     public void deleteBooking(Long id) {
         if (bookingRepository.existsById(id)) {
             bookingRepository.deleteById(id);
         } else {
             throw new IllegalArgumentException("Booking not found with id: " + id);
-
+        }
     }
+
 }
