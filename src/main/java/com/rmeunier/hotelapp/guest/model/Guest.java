@@ -1,6 +1,6 @@
 package com.rmeunier.hotelapp.guest.model;
 
-import com.rmeunier.hotelapp.user.User;
+import com.rmeunier.hotelapp.user.HotelUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,8 @@ import java.time.Period;
 @NoArgsConstructor
 @Entity
 @Table(name = "guest")
-public class Guest extends User {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Guest extends HotelUser {
     private String firstName;
     private String lastName;
     @OneToOne
@@ -25,6 +26,15 @@ public class Guest extends User {
     private LocalDate dateOfBirth;
     @Transient
     private int age;
+
+    public Guest(@NonNull String email, @NonNull String password, String lastName, String firstName, String phone, LocalDate dateOfBirth, int age) {
+        super(email, password);
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.phone = phone;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+    }
 
     public Guest(@NonNull String email, @NonNull String password,
                  String firstName, String lastName,
@@ -37,8 +47,12 @@ public class Guest extends User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    private void setAge() {
+    public void setAge() {
         this.age = Period.between(this.dateOfBirth, LocalDate.now()).getYears();
+    }
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
     }
 
 }

@@ -6,27 +6,27 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class HotelUserService {
 
-    private final UserRepository userRepository;
+    private final HotelUserRepository userRepository;
 
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public HotelUserService(HotelUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers() {
+    public List<HotelUser> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id) {
+    public HotelUser getUserById(Long id) {
         return userRepository.findById(id)
                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + id));
     }
 
-    public User saveUser(User user) {
+    public HotelUser saveUser(HotelUser user) {
 //        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setPassword(user.getPassword());
         return userRepository.save(user);

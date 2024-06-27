@@ -42,4 +42,11 @@ public class Booking {
         int numOfNights = Period.between(checkInDate, checkInDate).getDays();
         return room.getRoomType().getBasePrice() * numOfNights;
     }
+
+    public Booking createBooking(Room room, Guest guest, LocalDate checkInDate, LocalDate checkOutDate) {
+        if (room == null || guest == null || checkInDate == null || checkOutDate == null) {
+            throw new IllegalArgumentException("Room, guest, check-in date and check-out date must not be null");
+        }
+        return new Booking(room, guest, checkInDate, checkOutDate);
+    }
 }

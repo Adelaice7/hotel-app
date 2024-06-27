@@ -7,12 +7,13 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Entity
+@Entity(name = "hotel_user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+@Table(name = "hotel_user")
+public abstract class HotelUser {
     @Id
-    @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_", allocationSize = 1)
-    @GeneratedValue(generator = "user_id_seq")
+    @SequenceGenerator(name = "hotel_user_id_seq", sequenceName = "hotel_user_id_", allocationSize = 1)
+    @GeneratedValue(generator = "hotel_user_id_seq")
     private Long id;
     @NonNull
     private String email;

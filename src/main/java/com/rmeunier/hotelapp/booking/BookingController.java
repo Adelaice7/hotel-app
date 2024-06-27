@@ -1,6 +1,7 @@
 package com.rmeunier.hotelapp.booking;
 
 import com.rmeunier.hotelapp.booking.model.Booking;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,22 +31,24 @@ public class BookingController {
     }
 
     @GetMapping("/{id}")
-    public Booking getBookingById(@PathVariable("id") Long id) {
-        return bookingService.getBookingById(id);
+    public ResponseEntity<Booking> getBookingById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(bookingService.getBookingById(id));
     }
 
     @PostMapping
-    public Booking createBooking(@RequestBody Booking booking) {
-        return bookingService.saveBooking(booking);
+    public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
+        return ResponseEntity.ok(bookingService.saveBooking(booking));
     }
 
     @PutMapping("/{id}")
     public void updateBooking(@PathVariable("id") Long id, @RequestBody Booking booking) {
+        // TODO add feedback after update
         bookingService.updateBooking(id, booking);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBooking(@PathVariable("id") Long id) {
+        // TODO add feedback after delete
         bookingService.deleteBooking(id);
     }
 }

@@ -8,16 +8,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
-public class UserController {
+public class HotelUserController {
 
-    private final UserService userService;
+    private final HotelUserService userService;
 
-    public UserController(UserService userService) {
+    public HotelUserController(HotelUserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<HotelUser> getAllUsers() {
         return userService.getAllUsers();
     }
 }

@@ -11,10 +11,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "home_address")
 public class HomeAddress {
+
     @Id
     @SequenceGenerator(name = "home_address_id_seq", sequenceName = "home_address_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "home_address_id_seq")
-    private static long id;
+    private Long id;
     private String street;
     private String city;
     private String state;

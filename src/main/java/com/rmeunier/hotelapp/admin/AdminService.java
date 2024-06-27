@@ -36,12 +36,14 @@ public class AdminService {
     }
 
     @Transactional
-    public void updateAdmin(Long id, Admin admin) {
+    public void updateAdmin(Long id, String email, String password, String role) {
         Admin adminInDb = adminRepository.findById(id)
                .orElseThrow(() -> new AdminNotFoundException("Admin of " + id + " not found."));
 
-        adminInDb.setEmail(admin.getEmail());
-        adminInDb.setPassword(admin.getPassword());
-        adminInDb.setRole(admin.getRole());
+        // TODO password encryption + validations
+
+        adminInDb.setEmail(email);
+        adminInDb.setPassword(password);
+        adminInDb.setRole(role);
     }
 }

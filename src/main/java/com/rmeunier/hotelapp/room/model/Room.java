@@ -19,8 +19,8 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
-    @ManyToOne
-    @JoinColumn(name = "status_id", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "room_status", nullable = false)
     private RoomStatus status;
 
     public Room(String roomNumber, RoomType roomType, RoomStatus status) {

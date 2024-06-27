@@ -31,16 +31,18 @@ public class GuestService {
         // Do some validation
         guestRepository.findByEmail(guest.getEmail())
                 .ifPresent(guestInDb -> {
-                    throw new IllegalArgumentException("Guest with email: " + guest.getEmail() + " already exists.");
+                    throw new IllegalArgumentException(
+                            "Guest with email: " + guest.getEmail() + " already exists.");
                 });
 
-        // TODO save address
+        // TODO save address separetely
 
         return guestRepository.save(guest);
     }
 
     @Transactional
-    public void updateGuest(Long id, String firstName, String lastName, String email, String phone, LocalDate dateOfBirth) {
+    public void updateGuest(Long id, String firstName, String lastName,
+                            String email, String phone, LocalDate dateOfBirth) {
         Guest guestInDb = guestRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Guest not found with id: " + id));
 
@@ -63,6 +65,8 @@ public class GuestService {
         if (dateOfBirth != null && !Objects.equals(guestInDb.getDateOfBirth(), dateOfBirth)) {
             guestInDb.setDateOfBirth(dateOfBirth);
         }
+
+        // TODO add pw enc
     }
 
     public void deleteGuest(Long id) {

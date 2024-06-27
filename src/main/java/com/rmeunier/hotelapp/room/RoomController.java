@@ -4,6 +4,7 @@ import com.rmeunier.hotelapp.room.model.Room;
 import com.rmeunier.hotelapp.room.model.RoomStatus;
 import com.rmeunier.hotelapp.room.model.RoomType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,25 +26,27 @@ public class RoomController {
     }
 
     @GetMapping("/{id}")
-    public Room getRoomById(@PathVariable("id") Long id) {
-        return roomService.getRoomById(id);
+    public ResponseEntity<Room> getRoomById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(roomService.getRoomById(id));
     }
 
     @PostMapping
-    public Room saveNewRoom(Room room) {
-        return roomService.saveNewRoom(room);
+    public ResponseEntity<Room> saveNewRoom(Room room) {
+        return ResponseEntity.ok(roomService.saveNewRoom(room));
     }
 
     @PutMapping("/{id}")
     public void updateRoom(@PathVariable("id") Long id,
-                           @RequestParam("roomNumber") String roomNumber,
-                           @RequestParam("roomType") RoomType roomType,
-                           @RequestParam("status") RoomStatus status) {
+                           @RequestParam(value = "roomNumber", required = false) String roomNumber,
+                           @RequestParam(value = "roomType", required = false) RoomType roomType,
+                           @RequestParam( value = "status", required = false) RoomStatus status) {
+        // TODO feedback after updating
         roomService.updateRoom(id, roomNumber, roomType, status);
     }
 
     @DeleteMapping("/{id}")
     public void deleteRoom(@PathVariable("id") Long id) {
+        // TODO feedback after deleting
         roomService.deleteRoom(id);
     }
 }
