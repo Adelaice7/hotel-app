@@ -1,6 +1,8 @@
 package com.rmeunier.hotelapp.booking;
 
 import com.rmeunier.hotelapp.booking.model.Booking;
+import com.rmeunier.hotelapp.room.RoomService;
+import com.rmeunier.hotelapp.room.model.RoomStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,12 @@ public class BookingService {
 
     private final BookingRepository bookingRepository;
 
+    private final RoomService roomService;
+
     @Autowired
-    public BookingService(BookingRepository bookingRepository) {
+    public BookingService(BookingRepository bookingRepository, RoomService roomService) {
         this.bookingRepository = bookingRepository;
+        this.roomService = roomService
     }
 
     public List<Booking> getAllBookings() {
@@ -34,6 +39,8 @@ public class BookingService {
     }
 
     public Booking saveBooking(Booking booking) {
+        // TODO do validation on room availability, fix booking status
+        roomService.bookRoomByRoomNumber(booking.getRoom().getRoomNumber());
         return bookingRepository.save(booking);
     }
 

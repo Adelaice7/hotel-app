@@ -16,6 +16,8 @@ public class Room {
     @GeneratedValue(generator = "room_id_seq")
     private Long id;
     private String roomNumber;
+    private String floorNumber;
+    private String description;
     @ManyToOne
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
@@ -23,9 +25,15 @@ public class Room {
     @Column(name = "room_status", nullable = false)
     private RoomStatus status;
 
-    public Room(String roomNumber, RoomType roomType, RoomStatus status) {
+    public Room(String roomNumber, String floorNumber, String description, RoomType roomType, RoomStatus status) {
         this.roomNumber = roomNumber;
+        this.floorNumber = floorNumber;
+        this.description = description;
         this.roomType = roomType;
         this.status = status;
+    }
+
+    public boolean isAvailable() {
+        return this.status == RoomStatus.FREE;
     }
 }

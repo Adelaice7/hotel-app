@@ -33,8 +33,18 @@ public class RoomService {
         if (roomRepository.findRoomByRoomNumber(room.getRoomNumber()).isPresent()) {
             throw new IllegalArgumentException("Room already exists with number: " + room.getRoomNumber());
         }
-
         return roomRepository.save(room);
+    }
+
+    public void bookRoomByRoomNumber(String roomNumber) {
+        Room room = roomRepository.findRoomByRoomNumber(roomNumber)
+                .orElseThrow(() -> new IllegalArgumentException("Room not found with number: " + roomNumber));
+
+        if (room.isAvailable()) {
+            room.setStatus(RoomStatus.BOOKED);
+        } else {
+            throw new IllegalArgumentException("Room not available with number: " + roomNumber);
+        }
     }
 
     @Transactional

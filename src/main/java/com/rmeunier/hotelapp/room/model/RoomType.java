@@ -22,4 +22,5 @@ public class RoomType {
     private boolean isSmoking;
     private boolean isWifi;
     private boolean isParking;
+    // TODO rework room type to be an enum?
 }
