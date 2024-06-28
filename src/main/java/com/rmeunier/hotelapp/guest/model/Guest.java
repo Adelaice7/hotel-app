@@ -15,7 +15,7 @@ import java.time.Period;
 @NoArgsConstructor
 @Entity
 @Table(name = "guest")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)@Primary
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Guest extends HotelUser {
     @Column(name = "first_name", columnDefinition = "TEXT")
     private String firstName;
