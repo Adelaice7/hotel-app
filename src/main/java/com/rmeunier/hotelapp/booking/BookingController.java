@@ -37,7 +37,7 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
-        return ResponseEntity.ok(bookingService.saveBooking(booking));
+        return ResponseEntity.ok(bookingService.createBooking(booking));
     }
 
     @PutMapping("/{id}")
@@ -49,6 +49,6 @@ public class BookingController {
     @DeleteMapping("/{id}")
     public void deleteBooking(@PathVariable("id") Long id) {
         // TODO add feedback after delete
-        bookingService.deleteBooking(id);
+        bookingService.cancelBooking(id);
     }
 }
