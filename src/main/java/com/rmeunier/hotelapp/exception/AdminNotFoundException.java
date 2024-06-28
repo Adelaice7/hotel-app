@@ -1,4 +1,4 @@
-package com.rmeunier.hotelapp.admin;
+package com.rmeunier.hotelapp.exception;
 
 public class AdminNotFoundException extends RuntimeException {
 

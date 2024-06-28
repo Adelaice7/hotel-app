@@ -6,6 +6,8 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PricingService {
     private BookingService bookingService;
@@ -19,7 +21,8 @@ public class PricingService {
         final Booking booking = bookingService.getBookingById(Long.parseLong(bookingId));
         final Bill bill = new Bill();
         bill.setRoom(booking.getRoom());
-        bill.setGuest(booking.getGuest());
+        // TODO fix, add guest
+        bill.setBooking(List.of(booking));
         bill.setTotal(booking.getTotalPrice());
         return bill;
     }

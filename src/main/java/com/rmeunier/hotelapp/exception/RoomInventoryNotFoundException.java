@@ -1,4 +1,4 @@
-package com.rmeunier.hotelapp.room;
+package com.rmeunier.hotelapp.exception;
 
 public class RoomInventoryNotFoundException extends Exception {
     public RoomInventoryNotFoundException(String message) {

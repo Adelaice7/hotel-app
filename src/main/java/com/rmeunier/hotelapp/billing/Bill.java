@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,15 +23,15 @@ public class Bill {
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
-    @OneToMany
-    @JoinColumn(name = "guest_id", nullable = false)
-    private Guest guest;
     @ManyToMany
-    @JoinColumn(name = "booking_id", nullable = false)
-    private Booking booking;
+    @JoinTable(name = "bills_guest")
+    private List<Guest> guest;
+    @ManyToMany
+    @JoinTable(name = "bills_booking")
+    private List<Booking> booking;
     private double total;
 
-    public Bill(Room room, Guest guest, Booking booking, double total) {
+    public Bill(Room room, List<Guest> guest, List<Booking> booking, double total) {
         this.room = room;
         this.guest = guest;
         this.booking = booking;

@@ -15,14 +15,18 @@ import java.time.Period;
 @NoArgsConstructor
 @Entity
 @Table(name = "guest")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)@Primary
 public class Guest extends HotelUser {
+    @Column(name = "first_name", columnDefinition = "TEXT")
     private String firstName;
+    @Column(name = "last_name", columnDefinition = "TEXT")
     private String lastName;
     @OneToOne
     @JoinColumn(name = "home_address_id")
     private HomeAddress homeAddress;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
     @Transient
     private int age;

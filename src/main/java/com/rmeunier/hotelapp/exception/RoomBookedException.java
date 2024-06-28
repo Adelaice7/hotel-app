@@ -1,4 +1,4 @@
-package com.rmeunier.hotelapp.room;
+package com.rmeunier.hotelapp.exception;
 
 public class RoomBookedException extends Exception {
     public RoomBookedException(String message) {

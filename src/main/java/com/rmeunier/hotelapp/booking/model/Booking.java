@@ -40,7 +40,9 @@ public class Booking {
 
     public double getTotalPrice() {
         int numOfNights = Period.between(checkInDate, checkInDate).getDays();
-        return room.getRoomType().getBasePrice() * numOfNights;
+        int price = 2;
+        // TODO fix price
+        return numOfNights * price;
     }
 
     public Booking createBooking(Room room, Guest guest, LocalDate checkInDate, LocalDate checkOutDate) {

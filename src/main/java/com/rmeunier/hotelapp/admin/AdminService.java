@@ -1,6 +1,7 @@
 package com.rmeunier.hotelapp.admin;
 
 import com.rmeunier.hotelapp.admin.model.Admin;
+import com.rmeunier.hotelapp.exception.AdminNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

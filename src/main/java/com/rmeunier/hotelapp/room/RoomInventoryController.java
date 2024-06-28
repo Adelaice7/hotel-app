@@ -1,5 +1,6 @@
 package com.rmeunier.hotelapp.room;
 
+import com.rmeunier.hotelapp.exception.RoomInventoryNotFoundException;
 import com.rmeunier.hotelapp.room.model.RoomInventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
